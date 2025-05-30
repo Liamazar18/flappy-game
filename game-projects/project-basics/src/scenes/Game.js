@@ -31,13 +31,14 @@ export class Game extends Phaser.Scene {
         this.background1 = this.add.image(0, 0, 'background').setOrigin(0);
         this.background2 = this.add.image(this.background1.width, 0, 'background').setOrigin(0);
 
-
+        this.platforms = this.physics.add.staticGroup();
         this.hole = this.physics.add.staticGroup();
 
-        this.hole.create(400, 400, 'hole').setScale(.125);
+        this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+        this.hole.create(400, 400, 'hole').setScale(.125).refreshBody();
 
 
-            // testing testing testing
+            
 
         // Create score text
         this.scoreText = this.add.text(250, 50, 'Score: 0', {
@@ -85,7 +86,7 @@ export class Game extends Phaser.Scene {
         this.coinGroup = this.add.group();
 
 
-        //this.physics.add.overlap(this.player, this.hole, this.hitObstacle, null, this);
+        this.physics.add.overlap(this.player, this.hole, this.hitObstacle, null, this);
         this.physics.world.setBounds(0, 0, 800, 600);
     }
 

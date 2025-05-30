@@ -33,6 +33,7 @@ export class Preloader extends Phaser.Scene {
                 this.load[type].apply(this.load, args);
             }
         }
+        this.load.image('ground', 'platform.png');
     }
 
     create() {
