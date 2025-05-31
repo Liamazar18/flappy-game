@@ -73,19 +73,14 @@ export class Game extends Phaser.Scene {
             frameRate: ANIMATION.bat.frameRate,
             repeat: ANIMATION.bat.repeat
         });
-        this.anims.create({
-            key: ANIMATION.coin.key,
-            frames: this.anims.generateFrameNumbers(ANIMATION.coin.texture),
-            frameRate: ANIMATION.coin.frameRate,
-            repeat: ANIMATION.coin.repeat
-        });
+        
     }
 
     initPhysics() {
         this.obstacleGroup = this.add.group();
         this.coinGroup = this.add.group();
 
-
+        this.physics.add.collider(this.player, this.platforms);
         this.physics.add.overlap(this.player, this.hole, this.hitObstacle, null, this);
         this.physics.world.setBounds(0, 0, 800, 600);
     }
