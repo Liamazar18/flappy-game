@@ -35,10 +35,12 @@ export class Game extends Phaser.Scene {
         this.hole = this.physics.add.staticGroup();
 
         this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-        this.hole.create(400, 400, 'hole').setScale(.125).refreshBody();
+        this.hole.create(600, 500, 'hole').setScale(.1).refreshBody();
 
-
+        this.platforms.create(200, 400, 'ground').setScale(1.5).refreshBody();
             
+        
+
 
         // Create score text
         this.scoreText = this.add.text(250, 50, 'Score: 0', {
@@ -56,12 +58,18 @@ export class Game extends Phaser.Scene {
         this.movement();
         this.physics.add.collider(this.player, this.hole);
 
-
         
     }
 
     update() {
-       
+
+        // Optional: reduce horizontal velocity when touching ground
+        if (this.player.body.touching.down) {
+            this.player.setDrag(300, 0); // More friction on ground
+        } else {
+            this.player.setDrag(20, 0); // Less drag in air
+        }
+    
 
         if (!this.gameStarted) return;
     }
@@ -80,6 +88,8 @@ export class Game extends Phaser.Scene {
         this.obstacleGroup = this.add.group();
         this.coinGroup = this.add.group();
 
+        this.player.setBounce(0.5); // Bounce when hitting ground
+        this.physics.world.setBoundsCollision(true, true, true, false);
         this.physics.add.collider(this.player, this.platforms);
         this.physics.add.overlap(this.player, this.hole, this.hitObstacle, null, this);
         this.physics.world.setBounds(0, 0, 800, 600);
