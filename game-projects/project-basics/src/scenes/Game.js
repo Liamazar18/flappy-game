@@ -9,7 +9,7 @@ export class Game extends Phaser.Scene {
     constructor() {
         super('Game');
         this.gameStarted = false;
-        this.flyVelocityY = -200;
+        this.flyVelocityY = -225;
         this.flyVelocityXleft = -200;
         this.flyVelocityXright = 200;
         this.score = 0;
@@ -162,7 +162,7 @@ export class Game extends Phaser.Scene {
 
     GameOver() {
         this.time.delayedCall(2000, () => {
-            this.scene.start('GameOver');
+            this.scene.start('GameOver', { score: this.score });
         });
     }
 }
