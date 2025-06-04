@@ -9,9 +9,9 @@ export class Game extends Phaser.Scene {
     constructor() {
         super('Game');
         this.gameStarted = false;
-        this.flyVelocityY = -300;
-        this.flyVelocityXleft = -300;
-        this.flyVelocityXright = 300;
+        this.flyVelocityY = -200;
+        this.flyVelocityXleft = -200;
+        this.flyVelocityXright = 200;
         this.score = 0;
 
         this.distance = 0;
@@ -106,6 +106,7 @@ export class Game extends Phaser.Scene {
         this.physics.pause();
         this.input.once('pointerdown', () => {
             this.startGame();
+            this.movement();
         });
     }
 
@@ -116,6 +117,7 @@ export class Game extends Phaser.Scene {
 
 
     movement() {
+        if (!this.gameStarted) return;
         this.input.keyboard.on('keydown-RIGHT', () => {
             this.flyRight();
             console.log(this.player);
