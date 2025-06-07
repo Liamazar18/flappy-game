@@ -1,10 +1,11 @@
+import { createButton } from "../buttonSprites/buttonTemp.js";
 export class GameOver extends Phaser.Scene {
     constructor() {
         super('GameOver');
     }
 
-    create() {
-        this.score = this.registry.get('score');
+    create(data) {
+        this.score = data.score;
         this.background1 = this.add.image(0, 0, 'background').setOrigin(0);
 
         this.add.text(this.scale.width * 0.5, this.scale.height * 0.5, 'You Won!!', {
@@ -19,6 +20,11 @@ export class GameOver extends Phaser.Scene {
             stroke: '#000000', strokeThickness: 8,
             align: 'center'
         }).setOrigin(.5);
+
+
+        createButton(this, 400, 500, 'Back', 'buttonImage', () => {
+            this.scene.start('Home');
+        });
 
     }
 }
