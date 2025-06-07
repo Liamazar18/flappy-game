@@ -34,6 +34,7 @@ export class Preloader extends Phaser.Scene {
             }
         }
         this.load.image('ground', 'assets/platform1.png');
+        this.load.image('buttonImage', 'assets/button.png');
     }
 
     create() {

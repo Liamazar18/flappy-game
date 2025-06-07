@@ -4,6 +4,8 @@
 */
 import ASSETS from '../assets.js';
 import ANIMATION from '../animation.js';
+import { createButton } from '../buttonSprites/buttonTemp.js';
+
 
 export class Game extends Phaser.Scene {
     constructor() {
@@ -40,7 +42,11 @@ export class Game extends Phaser.Scene {
         this.platforms.create(200, 400, 'ground').setScale(1.5).refreshBody();
             
         
-
+        createButton(this, 100, 50, 'Back', 'buttonImage', () => {
+            this.gameStarted = false;
+            this.physics.pause();  
+            this.scene.start('Home');
+        });
 
         // Create score text
         this.scoreText = this.add.text(250, 50, 'Score: 0', {
