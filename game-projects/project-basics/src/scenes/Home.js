@@ -8,6 +8,7 @@ export class Home extends Phaser.Scene {
     create() {
         //  When all the assets have loaded, it's often worth creating global objects here that the rest of the game can use.
         //  For example, you can define global animations here, so we can use them in other scenes.
+        this.registry.set('score', 0); // ✅ This resets it globally
         this.add.image(0, 0, 'background').setOrigin(0, 0);
         this.add.text(400, 100, 'Welcome to the Game!', {
             fontFamily: 'Arial Black',

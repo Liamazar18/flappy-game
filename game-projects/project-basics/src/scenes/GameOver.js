@@ -5,7 +5,7 @@ export class GameOver extends Phaser.Scene {
     }
 
     create(data) {
-        this.score = data.score;
+        this.score = this.registry.get('score') || 0;;
         this.background1 = this.add.image(0, 0, 'background').setOrigin(0);
 
         this.add.text(this.scale.width * 0.5, this.scale.height * 0.5, 'You Won!!', {

@@ -14,7 +14,6 @@ export class Game extends Phaser.Scene {
         this.flyVelocityY = -225;
         this.flyVelocityXleft = -200;
         this.flyVelocityXright = 200;
-        this.score = 0;
 
         this.distance = 0;
     
@@ -26,6 +25,9 @@ export class Game extends Phaser.Scene {
     }
 
     create() {
+        this.score = this.registry.get('score') ?? 0;
+
+
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.cameras.main.setBackgroundColor(0x00ff00);
@@ -44,7 +46,8 @@ export class Game extends Phaser.Scene {
         
         createButton(this, 100, 50, 'Back', 'buttonImage', () => {
             this.gameStarted = false;
-            this.physics.pause();  
+            this.physics.pause();
+            this.saveScoreToRegistry();
             this.scene.start('Home');
         });
 
@@ -166,9 +169,14 @@ export class Game extends Phaser.Scene {
         this.GameOver();
     }
 
+    saveScoreToRegistry() {
+        this.registry.set('score', this.score);
+    } 
+
     GameOver() {
+        this.saveScoreToRegistry();
         this.time.delayedCall(2000, () => {
-            this.scene.start('GameOver', { score: this.score });
+            this.scene.start('GameOver');
         });
     }
 }
