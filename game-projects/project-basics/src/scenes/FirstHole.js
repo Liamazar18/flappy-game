@@ -7,9 +7,9 @@ import ANIMATION from '../animation.js';
 import { createButton } from '../buttonSprites/buttonTemp.js';
 
 
-export class Game extends Phaser.Scene {
+export class FirstHole extends Phaser.Scene {
     constructor() {
-        super('Game');
+        super('FirstHole');
         this.gameStarted = false;
         this.flyVelocityY = -225;
         this.flyVelocityXleft = -200;
@@ -44,7 +44,7 @@ export class Game extends Phaser.Scene {
         this.platforms.create(200, 400, 'ground').setScale(1.5).refreshBody();
             
         
-        createButton(this, 100, 50, 'Back', 'buttonImage', () => {
+        createButton(this, 600, 50, 'Back', 'buttonImage', () => {
             this.gameStarted = false;
             this.physics.pause();
             this.saveScoreToRegistry();
@@ -52,7 +52,7 @@ export class Game extends Phaser.Scene {
         });
 
         // Create score text
-        this.scoreText = this.add.text(250, 50, 'Score: 0', {
+        this.scoreText = this.add.text(200, 50, 'Score: 0', {
             fontFamily: 'Arial Black', fontSize: 28, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'

@@ -1,5 +1,6 @@
 import { Boot } from './scenes/Boot.js';
-import { Game } from './scenes/Game.js';
+import { FirstHole } from './scenes/FirstHole.js';
+import { HoleComplete } from './scenes/HoleComplete.js';
 import { Home } from './scenes/Home.js';
 import { GameOver } from './scenes/GameOver.js';
 import { Preloader } from './scenes/Preloader.js';
@@ -25,7 +26,8 @@ const config = {
         Boot,
         Preloader,
         Home,
-        Game,
+        FirstHole,
+        HoleComplete,
         GameOver
     ]
 };

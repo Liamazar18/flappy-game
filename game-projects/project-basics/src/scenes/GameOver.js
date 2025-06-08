@@ -15,7 +15,7 @@ export class GameOver extends Phaser.Scene {
         }).setOrigin(0.5);
 
 
-        this.add.text(400, 400, 'You Reached the hole In ' + this.score + ' Shots ', {
+        this.add.text(400, 400, 'You Reached the Hole in ' + this.score + ' Shots ', {
             fontFamily: 'Arial Black', fontSize: 40, color: '#ffffff',
             stroke: '#000000', strokeThickness: 8,
             align: 'center'

@@ -10,7 +10,7 @@ export class Home extends Phaser.Scene {
         //  For example, you can define global animations here, so we can use them in other scenes.
         this.registry.set('score', 0); // ✅ This resets it globally
         this.add.image(0, 0, 'background').setOrigin(0, 0);
-        this.add.text(400, 100, 'Welcome to the Game!', {
+        this.add.text(400, 100, 'Welcome to Flappy Golf!', {
             fontFamily: 'Arial Black',
             fontSize: 32,
             color: '#ffffff',
@@ -20,7 +20,7 @@ export class Home extends Phaser.Scene {
         }).setOrigin(0.5);
         //  Create a button to start the game
         const startButton = createButton(this, 400, 300, 'Start Game', 'buttonImage', () => {
-            this.scene.start('Game');
+            this.scene.start('FirstHole');
         });
         this.add.existing(startButton);
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
