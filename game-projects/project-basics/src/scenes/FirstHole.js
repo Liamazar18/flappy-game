@@ -5,6 +5,8 @@
 import ASSETS from '../assets.js';
 import ANIMATION from '../animation.js';
 import { createButton } from '../buttonSprites/buttonTemp.js';
+import { loadHole } from '../extra/loadHole.js';
+
 
 
 export class FirstHole extends Phaser.Scene {
@@ -26,7 +28,9 @@ export class FirstHole extends Phaser.Scene {
 
     create() {
         this.score = this.registry.get('score') ?? 0;
+        this.holeNumber = this.registry.get('currentHole') ?? 1;
 
+        
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -38,12 +42,14 @@ export class FirstHole extends Phaser.Scene {
         this.platforms = this.physics.add.staticGroup();
         this.hole = this.physics.add.staticGroup();
 
-        this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-        this.hole.create(600, 500, 'hole').setScale(.1).refreshBody();
+        //this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+        //this.hole.create(600, 500, 'hole').setScale(.1).refreshBody();
 
-        this.platforms.create(200, 400, 'ground').setScale(1.5).refreshBody();
+        //this.platforms.create(200, 400, 'ground').setScale(1.5).refreshBody();
             
         
+
+
         createButton(this, 600, 50, 'Back', 'buttonImage', () => {
             this.gameStarted = false;
             this.physics.pause();
@@ -66,6 +72,8 @@ export class FirstHole extends Phaser.Scene {
         this.initPhysics();
         this.movement();
         this.physics.add.collider(this.player, this.hole);
+
+        loadHole(this, this.holeNumber); // Load the first hole layout
 
         
     }
@@ -155,6 +163,14 @@ export class FirstHole extends Phaser.Scene {
     
 
     hitObstacle(player, obstacle) {
+        const strokes = this.score;
+        const holeScores = this.registry.get('holeScores') ?? [];
+        holeScores.push(strokes);
+        const totalScore = (this.registry.get('totalScore') ?? 0) + strokes;
+
+        this.registry.set('totalScore', totalScore);
+        this.registry.set('currentHole', this.holeNumber + 1);
+        this.registry.set('holeScores', holeScores);
         this.gameStarted = false;
         this.physics.pause();
 
@@ -176,7 +192,7 @@ export class FirstHole extends Phaser.Scene {
     GameOver() {
         this.saveScoreToRegistry();
         this.time.delayedCall(2000, () => {
-            this.scene.start('GameOver');
+            this.scene.start('HoleComplete');
         });
     }
 }
