@@ -6,7 +6,7 @@ export function loadHole(scene, holeNumber) {
 
     const layout = HOLELAYOUTS[holeNumber - 1];
 
-    HOLELAYOUTS[1].platforms.forEach(platform => {
+    layout.platforms.forEach(platform => {
         scene.platforms.create(platform.x, platform.y, 'ground').setScale(platform.scale).refreshBody();
     });
 
