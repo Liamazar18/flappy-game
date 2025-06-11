@@ -3,6 +3,7 @@ import { FirstHole } from './scenes/FirstHole.js';
 import { HoleComplete } from './scenes/HoleComplete.js';
 import { Home } from './scenes/Home.js';
 import { GameOver } from './scenes/GameOver.js';
+import { TestHole } from './scenes/testHole.js';
 import { Preloader } from './scenes/Preloader.js';
 
 const config = {
@@ -14,7 +15,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: false,
+            debug: true,
             gravity: { y: 400 }
         }
     },
@@ -28,7 +29,8 @@ const config = {
         Home,
         FirstHole,
         HoleComplete,
-        GameOver
+        GameOver,
+        TestHole
     ]
 };
 
