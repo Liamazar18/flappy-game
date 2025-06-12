@@ -10,7 +10,7 @@ export function loadHole(scene, holeNumber) {
         scene.platforms.create(platform.x, platform.y, 'ground').setScale(platform.scale).refreshBody();
     });
 
-    scene.hole.create(layout.hole.x, layout.hole.y, 'hole').setScale(layout.hole.scale).refreshBody();
+    scene.hole.create(layout.hole.x, layout.hole.y, 'hole').setScale(layout.hole.scale).refreshBody().body.setSize(12, 30).setOffset(31, 45);
 
     scene.player.setPosition(layout.player.x, layout.player.y);
     scene.player.setVelocity(0, 0);

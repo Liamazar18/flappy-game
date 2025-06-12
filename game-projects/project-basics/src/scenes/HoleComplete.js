@@ -24,7 +24,7 @@ export class HoleComplete extends Phaser.Scene {
 
 
         createButton(this, 400, 500, 'Next Hole', 'buttonImage', () => {
-            if (this.holeNumber >= 2) {
+            if (this.holeNumber >= 3) {
                 this.scene.start('GameOver'); // If the player has completed all holes, go to GameOver
                 return;
             }

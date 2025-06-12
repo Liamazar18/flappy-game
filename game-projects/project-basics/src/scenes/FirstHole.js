@@ -30,7 +30,6 @@ export class FirstHole extends Phaser.Scene {
         this.score = this.registry.get('score') ?? 0;
         this.holeNumber = this.registry.get('currentHole') ?? 1;
 
-        
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -86,6 +85,16 @@ export class FirstHole extends Phaser.Scene {
         } else {
             this.player.setDrag(20, 0); // Less drag in air
         }
+
+        if (this.gameStarted == false) {
+            this.add.text(400, 300, 'Click to Start', {
+                fontFamily: 'Arial Black', fontSize: 32, color: '#ffffff',
+                stroke: '#000000', strokeThickness: 8,
+                align: 'center'
+            })
+                .setOrigin(0.5)
+                .setDepth(100);
+        }
     
 
         if (!this.gameStarted) return;
@@ -113,7 +122,7 @@ export class FirstHole extends Phaser.Scene {
     }
 
     initPlayer() {
-        this.player = this.physics.add.sprite(200, this.centreY, ASSETS.spritesheet.bat.key)
+        this.player = this.physics.add.sprite(200, this.centreY, ASSETS.spritesheet.bat.key).setSize(25, 25)
             .setDepth(100)
             .setCollideWorldBounds(true);
         this.player.anims.play(ANIMATION.bat.key, true);

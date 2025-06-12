@@ -26,6 +26,14 @@ export class Home extends Phaser.Scene {
             this.scene.start('FirstHole');
         });
         this.add.existing(startButton);
+        const tableButton = createButton(this, 400, 400, 'Leaderboard', 'buttonImage', () => {
+            this.scene.start('Leaderboard');
+        });
+        this.add.existing(tableButton);
+        const tutorialButton = createButton(this, 400, 500, 'Tutorial', 'buttonImage', () => {
+            this.scene.start('Tutorial');
+        });
+        this.add.existing(tutorialButton);
         //  Move to the MainMenu. You could also swap this for a Scene Transition, such as a camera fade.
         //this.scene.start('Game');
     }

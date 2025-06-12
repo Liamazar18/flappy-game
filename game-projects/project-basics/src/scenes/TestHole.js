@@ -43,7 +43,7 @@ export class TestHole extends Phaser.Scene {
         this.hole = this.physics.add.staticGroup();
 
         this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-        this.hole.create(600, 520, 'hole').setScale(.1).refreshBody().body.setSize(20, 70).setOffset(30, 10);
+        this.hole.create(600, 520, 'hole').setScale(.1).refreshBody().body.setSize(12, 30).setOffset(31, 45);
 
         this.platforms.create(600, 400, 'ground').setScale(1.5).refreshBody();
         this.platforms.create(200, 200, 'ground').setScale(1.5).refreshBody();
