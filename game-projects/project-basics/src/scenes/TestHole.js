@@ -27,6 +27,8 @@ export class TestHole extends Phaser.Scene {
     }
 
     create() {
+        console.log("h" + window.nameWindow);
+
         this.score = this.registry.get('score') ?? 0;
         this.holeNumber = this.registry.get('currentHole') ?? 1;
 
@@ -43,10 +45,15 @@ export class TestHole extends Phaser.Scene {
         this.hole = this.physics.add.staticGroup();
 
         this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-        this.hole.create(600, 520, 'hole').setScale(.1).refreshBody().body.setSize(12, 30).setOffset(31, 45);
+        this.hole.create(600, 300, 'hole').setScale(.1).refreshBody().body.setSize(12, 30).setOffset(31, 45);
 
-        this.platforms.create(600, 400, 'ground').setScale(1.5).refreshBody();
-        this.platforms.create(200, 200, 'ground').setScale(1.5).refreshBody();
+        this.ground = this.platforms.create(700, 250, 'ground').setScale(.5).refreshBody();
+        this.ground.angle = 90;
+        this.ground.setSize(18, 210);
+        this.ground1 = this.platforms.create(500, 250, 'ground').setScale(.5).refreshBody();
+        this.ground1.angle = 90;
+        this.ground1.setSize(18, 210);
+        this.platforms.create(600, 350, 'ground').setScale(.5).refreshBody();
     
             
         
@@ -75,7 +82,7 @@ export class TestHole extends Phaser.Scene {
         this.movement();
         this.physics.add.collider(this.player, this.hole);
 
-        this.player.setPosition(100, 100);
+        this.player.setPosition(100, 500);
         
         
     }

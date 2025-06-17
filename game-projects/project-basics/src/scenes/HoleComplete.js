@@ -28,8 +28,11 @@ export class HoleComplete extends Phaser.Scene {
                 this.scene.start('GameOver'); // If the player has completed all holes, go to GameOver
                 return;
             }
-            this.registry.set('score', 0); // Reset the score for the next hole
+            else {
+                this.registry.set('score', 0); // Reset the score for the next hole
             this.scene.start('FirstHole'); // Start the next hole scene
+            }
+          
         });
 
     }

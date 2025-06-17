@@ -24,10 +24,11 @@ export class Home extends Phaser.Scene {
         //  Create a button to start the game
         const startButton = createButton(this, 400, 300, 'Start Game', 'buttonImage', () => {
             this.scene.start('FirstHole');
+
         });
         this.add.existing(startButton);
         const tableButton = createButton(this, 400, 400, 'Leaderboard', 'buttonImage', () => {
-            this.scene.start('Leaderboard');
+            window.open('http://localhost:8080/phaser/game-projects/project-basics/highscores.php', '_blank');
         });
         this.add.existing(tableButton);
         const tutorialButton = createButton(this, 400, 500, 'Tutorial', 'buttonImage', () => {

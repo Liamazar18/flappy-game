@@ -5,7 +5,7 @@ import { Home } from './scenes/Home.js';
 import { GameOver } from './scenes/GameOver.js';
 import { Leaderboard } from './scenes/Leaderboard.js';
 import { Tutorial } from './scenes/Tutorial.js';
-//import { TestHole } from './scenes/testHole.js';
+import { TestHole } from './scenes/TestHole.js';
 import { Preloader } from './scenes/Preloader.js';
 
 const config = {
@@ -33,8 +33,8 @@ const config = {
         HoleComplete,
         Leaderboard,
         Tutorial,
-        GameOver
-        //TestHole
+        GameOver,
+        TestHole
     ]
 };
 

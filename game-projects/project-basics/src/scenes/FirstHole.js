@@ -27,6 +27,9 @@ export class FirstHole extends Phaser.Scene {
     }
 
     create() {
+        
+
+
         this.score = this.registry.get('score') ?? 0;
         this.holeNumber = this.registry.get('currentHole') ?? 1;
 
@@ -74,6 +77,19 @@ export class FirstHole extends Phaser.Scene {
 
         loadHole(this, this.holeNumber); // Load the first hole layout
 
+        this.guideText = this.add.text(400, 300, 'Left Click to Start!', {
+            fontFamily: 'Arial Black',
+            fontSize: 32,
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 8,
+            align: 'center'
+        })
+            .setOrigin(0.5)
+            .setDepth(100);;
+        this.guideText.setVisible(true);
+        
+
         
     }
 
@@ -84,16 +100,6 @@ export class FirstHole extends Phaser.Scene {
             this.player.setDrag(300, 0); // More friction on ground
         } else {
             this.player.setDrag(20, 0); // Less drag in air
-        }
-
-        if (this.gameStarted == false) {
-            this.add.text(400, 300, 'Click to Start', {
-                fontFamily: 'Arial Black', fontSize: 32, color: '#ffffff',
-                stroke: '#000000', strokeThickness: 8,
-                align: 'center'
-            })
-                .setOrigin(0.5)
-                .setDepth(100);
         }
     
 
@@ -137,6 +143,7 @@ export class FirstHole extends Phaser.Scene {
     }
 
     startGame() {
+        this.guideText.setVisible(false);
         this.gameStarted = true;
         this.physics.resume();
     }
@@ -169,7 +176,6 @@ export class FirstHole extends Phaser.Scene {
         this.player.setVelocityY(this.flyVelocityY);
         this.player.setVelocityX(this.flyVelocityXleft);
     }
-    
 
     hitObstacle(player, obstacle) {
         const strokes = this.score;
@@ -203,6 +209,7 @@ export class FirstHole extends Phaser.Scene {
         this.time.delayedCall(2000, () => {
             this.scene.start('HoleComplete');
         });
+
     }
 }
 
