@@ -15,6 +15,14 @@ export class Home extends Phaser.Scene {
         this.add.image(0, 0, 'background').setOrigin(0, 0);
         this.add.text(400, 100, 'Welcome to Flappy Golf!', {
             fontFamily: 'Arial Black',
+            fontSize: 52,
+            color: '#A40000',
+            stroke: '#000000',
+            strokeThickness: 8,
+            align: 'center'
+        }).setOrigin(0.5);
+        this.add.text(400, 200, 'A Fun 7 Hole Golf Course', {
+            fontFamily: 'Arial Black',
             fontSize: 32,
             color: '#ffffff',
             stroke: '#000000',
@@ -23,7 +31,7 @@ export class Home extends Phaser.Scene {
         }).setOrigin(0.5);
         //  Create a button to start the game
         const startButton = createButton(this, 400, 300, 'Start Game', 'buttonImage', () => {
-            this.scene.start('FirstHole');
+            this.scene.start('Game');
 
         });
         this.add.existing(startButton);

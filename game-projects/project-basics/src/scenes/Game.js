@@ -9,9 +9,9 @@ import { loadHole } from '../extra/loadHole.js';
 
 
 
-export class TestHole extends Phaser.Scene {
+export class Game extends Phaser.Scene {
     constructor() {
-        super('TestHole');
+        super('Game');
         this.gameStarted = false;
         this.flyVelocityY = -225;
         this.flyVelocityXleft = -200;
@@ -27,12 +27,12 @@ export class TestHole extends Phaser.Scene {
     }
 
     create() {
-        console.log("h" + window.nameWindow);
+        
+
 
         this.score = this.registry.get('score') ?? 0;
         this.holeNumber = this.registry.get('currentHole') ?? 1;
 
-        
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -43,18 +43,12 @@ export class TestHole extends Phaser.Scene {
 
         this.platforms = this.physics.add.staticGroup();
         this.hole = this.physics.add.staticGroup();
+        this.spikes = this.physics.add.staticGroup();
 
-        this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
-        this.hole.create(600, 300, 'hole').setScale(.1).refreshBody().body.setSize(12, 30).setOffset(31, 45);
+        //this.platforms.create(400, 568, 'ground').setScale(2).refreshBody();
+        //this.hole.create(600, 500, 'hole').setScale(.1).refreshBody();
 
-        this.ground = this.platforms.create(700, 250, 'ground').setScale(.5).refreshBody();
-        this.ground.angle = 90;
-        this.ground.setSize(18, 210);
-        this.ground1 = this.platforms.create(500, 250, 'ground').setScale(.5).refreshBody();
-        this.ground1.angle = 90;
-        this.ground1.setSize(18, 210);
-        this.platforms.create(600, 350, 'ground').setScale(.5).refreshBody();
-    
+        //this.platforms.create(200, 400, 'ground').setScale(1.5).refreshBody();
             
         
 
@@ -62,7 +56,6 @@ export class TestHole extends Phaser.Scene {
         createButton(this, 600, 50, 'Back', 'buttonImage', () => {
             this.gameStarted = false;
             this.physics.pause();
-            this.saveScoreToRegistry();
             this.scene.start('Home');
         });
 
@@ -75,6 +68,19 @@ export class TestHole extends Phaser.Scene {
             .setOrigin(0.5)
             .setDepth(100);
 
+        this.guideText = this.add.text(400, 300, 'Left Click to Start!', {
+            fontFamily: 'Arial Black',
+            fontSize: 32,
+            color: '#ffffff',
+            stroke: '#000000',
+            strokeThickness: 8,
+            align: 'center'
+        })
+            .setOrigin(0.5)
+            .setDepth(100);;
+        this.guideText.setVisible(true);
+    
+
         this.initAnimations();
         this.initPlayer();
         this.initInput();
@@ -82,8 +88,10 @@ export class TestHole extends Phaser.Scene {
         this.movement();
         this.physics.add.collider(this.player, this.hole);
 
-        this.player.setPosition(100, 500);
+        loadHole(this, this.holeNumber); // Load the first hole layout
+
         
+
         
     }
 
@@ -117,6 +125,7 @@ export class TestHole extends Phaser.Scene {
         this.player.setBounce(0.5); // Bounce when hitting ground
         this.physics.world.setBoundsCollision(true, true, true, false);
         this.physics.add.collider(this.player, this.platforms);
+        this.physics.add.overlap(this.player, this.spikes, this.hitObstacle, null, this);
         this.physics.add.overlap(this.player, this.hole, this.hitObstacle, null, this);
         this.physics.world.setBounds(0, 0, 800, 600);
     }
@@ -137,6 +146,7 @@ export class TestHole extends Phaser.Scene {
     }
 
     startGame() {
+        this.guideText.setVisible(false);
         this.gameStarted = true;
         this.physics.resume();
     }
@@ -169,9 +179,18 @@ export class TestHole extends Phaser.Scene {
         this.player.setVelocityY(this.flyVelocityY);
         this.player.setVelocityX(this.flyVelocityXleft);
     }
-    
 
     hitObstacle(player, obstacle) {
+        if (obstacle.texture.key === 'spikes') {
+            this.registry.set('currentHole', this.holeNumber);
+            this.physics.pause();
+            this.gameStarted = false;
+            this.player.setTint(0xff0000); // Change color to red on hit
+            this.time.delayedCall(1000, () => {
+                this.scene.start('HoleFailed');
+            });
+        }
+        else {
         const strokes = this.score;
         const holeScores = this.registry.get('holeScores') ?? [];
         holeScores.push(strokes);
@@ -193,6 +212,7 @@ export class TestHole extends Phaser.Scene {
 
         this.GameOver();
     }
+    }
 
     saveScoreToRegistry() {
         this.registry.set('score', this.score);
@@ -203,6 +223,7 @@ export class TestHole extends Phaser.Scene {
         this.time.delayedCall(2000, () => {
             this.scene.start('HoleComplete');
         });
+
     }
 }
 

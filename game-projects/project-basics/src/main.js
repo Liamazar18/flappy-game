@@ -1,11 +1,10 @@
 import { Boot } from './scenes/Boot.js';
-import { FirstHole } from './scenes/FirstHole.js';
+import { Game } from './scenes/Game.js';
 import { HoleComplete } from './scenes/HoleComplete.js';
 import { Home } from './scenes/Home.js';
 import { GameOver } from './scenes/GameOver.js';
-import { Leaderboard } from './scenes/Leaderboard.js';
+import { HoleFailed } from './scenes/HoleFailed.js';
 import { Tutorial } from './scenes/Tutorial.js';
-import { TestHole } from './scenes/TestHole.js';
 import { Preloader } from './scenes/Preloader.js';
 
 const config = {
@@ -29,12 +28,11 @@ const config = {
         Boot,
         Preloader,
         Home,
-        FirstHole,
+        Game,
         HoleComplete,
-        Leaderboard,
+        HoleFailed,
         Tutorial,
-        GameOver,
-        TestHole
+        GameOver
     ]
 };
 
