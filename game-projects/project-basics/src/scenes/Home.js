@@ -16,7 +16,7 @@ export class Home extends Phaser.Scene {
         this.add.text(400, 100, 'Welcome to Flappy Golf!', {
             fontFamily: 'Arial Black',
             fontSize: 52,
-            color: '#A40000',
+            color: '#ffffff',
             stroke: '#000000',
             strokeThickness: 8,
             align: 'center'

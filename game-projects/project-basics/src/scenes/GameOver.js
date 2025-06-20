@@ -41,7 +41,7 @@ export class GameOver extends Phaser.Scene {
                 $('#nameModal').modal('hide');
                 
                 let scoreName = playerName.value;
-                $.get("http://localhost:8080/phaser/game-projects/project-basics/server.php?name=" + scoreName + "&score=" + finalScore);
+                $.get("8name=" + scoreName + "&score=" + finalScore);
             }
         });
 
