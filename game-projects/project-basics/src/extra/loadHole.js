@@ -9,10 +9,6 @@ export function loadHole(scene, holeNumber) {
     layout.platforms.forEach(platform => {
         scene.platforms.create(platform.x, platform.y, 'ground').setScale(platform.scale).refreshBody();
     });
-    
-    layout.spikes.forEach(spike => {
-        scene.spikes.create(spike.x, spike.y, 'spikes');
-    });
 
     scene.hole.create(layout.hole.x, layout.hole.y, 'hole').setScale(layout.hole.scale).refreshBody().body.setSize(12, 30).setOffset(31, 45);
 

@@ -70,7 +70,7 @@ export class Tutorial extends Phaser.Scene {
         
 
         const startButton = createButton(this, 400, 550, 'Start Game', 'buttonImage', () => {
-                    this.scene.start('Game');
+                    this.scene.start('FirstHole');
                 });
                 this.add.existing(startButton);
     }
